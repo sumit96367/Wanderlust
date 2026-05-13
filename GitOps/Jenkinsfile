@@ -19,7 +19,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/LondheShubham153/Wanderlust-Mega-Project.git","main")
+                    code_checkout("https://github.com/sumit96367/Wanderlust.git","main")
                 }
             }
         }
@@ -39,13 +39,13 @@ pipeline {
                 script{
                     dir('kubernetes'){
                         sh """
-                            sed -i -e s/wanderlust-backend-beta.*/wanderlust-backend-beta:${params.BACKEND_DOCKER_TAG}/g backend.yaml
+                            sed -i -e s/wanderlust-backend.*/wanderlust-backend:${params.BACKEND_DOCKER_TAG}/g backend.yaml
                         """
                     }
                     
                     dir('kubernetes'){
                         sh """
-                            sed -i -e s/wanderlust-frontend-beta.*/wanderlust-frontend-beta:${params.FRONTEND_DOCKER_TAG}/g frontend.yaml
+                            sed -i -e s/wanderlust-frontend.*/wanderlust-frontend:${params.FRONTEND_DOCKER_TAG}/g frontend.yaml
                         """
                     }
                     
@@ -68,7 +68,7 @@ pipeline {
                         git commit -m "Updated environment variables"
                         
                         echo "Pushing changes to github: "
-                        git push https://github.com/LondheShubham153/Wanderlust-Mega-Project.git main
+                        git push https://github.com/sumit96367/Wanderlust.git main
                     '''
                     }
                 }
@@ -79,7 +79,7 @@ pipeline {
         success {
             script {
                 emailext attachLog: true,
-                from: 'trainwithshubham@gmail.com',
+                from: 'npm.run.sumit@gmail.com',
                 subject: "Wanderlust Application has been updated and deployed - '${currentBuild.result}'",
                 body: """
                     <html>
@@ -96,14 +96,14 @@ pipeline {
                     </body>
                     </html>
             """,
-            to: 'trainwithshubham@gmail.com',
+            to: 'npm.run.sumit@gmail.com',
             mimeType: 'text/html'
             }
         }
       failure {
             script {
                 emailext attachLog: true,
-                from: 'trainwithshubham@gmail.com',
+                from: 'npm.run.sumit@gmail.com',
                 subject: "Wanderlust Application build failed - '${currentBuild.result}'",
                 body: """
                     <html>
@@ -117,7 +117,7 @@ pipeline {
                     </body>
                     </html>
             """,
-            to: 'trainwithshubham@gmail.com',
+            to: 'npm.run.sumit@gmail.com',
             mimeType: 'text/html'
             }
         }
