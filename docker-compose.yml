@@ -30,8 +30,8 @@ services:
     container_name: redis-service
     restart: unless-stopped
     image: redis:7.0.5-alpine 
-    expose:
-        - 6379
+    ports:
+      - "6379:6379"
     depends_on:
       - mongodb
 
