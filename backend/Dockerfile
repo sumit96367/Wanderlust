@@ -5,10 +5,15 @@ FROM node:22 AS backend-builder
 WORKDIR /app
 
 # code
-COPY . .
+COPY package*.json ./
 
 # packages install
-RUN npm i --legacy-peer-deps
+RUN npm install --legacy-peer-deps
+
+# copy the rest of the code
+COPY . .
+
+RUN chmod -R +x node_modules/.bin
 
 # tests
 RUN npm run test
