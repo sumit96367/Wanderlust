@@ -1,5 +1,5 @@
 # Stage 1
-FROM node:21 AS backend-builder
+FROM node:22 AS backend-builder
 
 # setup the working dir
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm i --legacy-peer-deps
 RUN npm run test
 
 # Stage 2
-FROM node:21-slim
+FROM node:22-slim
 
 # setup the working dir
 WORKDIR /app
