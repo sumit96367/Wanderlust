@@ -55,13 +55,13 @@ export default function BlogFeed() {
               : `Posts related to "${selectedCategory}"`}
           </h1>
           <div className="flex flex-col gap-6">
-            {posts.length === 0 || loading == true
-              ? Array(5)
-                  .fill(0)
-                  .map((_, index) => <FeaturedPostCardSkeleton key={index} />)
-              : posts
+            {Array.isArray(posts) && posts.length > 0 && !loading
+              ? posts
                   .slice(0, 5)
-                  .map((post, index) => <FeaturedPostCard key={index} post={post} />)}
+                  .map((post, index) => <FeaturedPostCard key={index} post={post} />)
+              : Array(5)
+                  .fill(0)
+                  .map((_, index) => <FeaturedPostCardSkeleton key={index} />)}
           </div>
         </div>
         <div className="w-full p-4 md:w-1/3">
@@ -95,13 +95,13 @@ export default function BlogFeed() {
               Latest Posts
             </h2>
             <div className="flex flex-col gap-4">
-              {latestPosts.length === 0
-                ? Array(5)
-                    .fill(0)
-                    .map((_, index) => <LatestPostCardSkeleton key={index} />)
-                : latestPosts
+              {Array.isArray(latestPosts) && latestPosts.length > 0
+                ? latestPosts
                     .slice(0, 5)
-                    .map((post, index) => <LatestPostCard key={index} post={post} />)}
+                    .map((post, index) => <LatestPostCard key={index} post={post} />)
+                : Array(5)
+                    .fill(0)
+                    .map((_, index) => <LatestPostCardSkeleton key={index} />)}
             </div>
           </div>
         </div>
