@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: trainwithshubham/wanderlust-backend:v2.3
+          image: sumitsen2004/wanderlust-backend:v2.3
           ports:
             - containerPort: 8080
 ---
